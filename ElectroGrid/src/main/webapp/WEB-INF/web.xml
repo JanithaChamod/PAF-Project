@@ -22,7 +22,10 @@
  <url-pattern>/PaymentService/*</url-pattern>
 </servlet-mapping>
   
-  
+  <servlet-mapping>
+ <servlet-name>Jersey Web Application Solar</servlet-name>
+ <url-pattern>/SolarService/*</url-pattern>
+</servlet-mapping>
   
   
 </web-app>
