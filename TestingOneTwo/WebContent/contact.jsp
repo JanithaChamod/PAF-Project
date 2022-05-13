@@ -1,18 +1,18 @@
-<%@page import="com.Official"%>
+<%@page import="com.Contact"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Managing Official Details</title>
+<title>Managing Contact Details</title>
 
 
 <link rel="stylesheet" href="views/bootstrap.min.css">
 <script src="views/bootstrap.min.css"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="components/official.js"></script>
+<script src="components/contact.js"></script>
 
 
 
@@ -21,31 +21,31 @@ pageEncoding="ISO-8859-1"%>
 <body> 
 
 <div class="container"><div class="row"><div class="col-6"> 
-<h1>Official Details Management</h1>
+<h1>Contact Details Management</h1>
 <form id="formItem" name="formItem">
- First Name
- <input id="firstName" name="firstName" type="text" 
+ Current Address
+ <input id="currentAddress" name="currentAddress" type="text" 
  class="form-control form-control-sm">
- <br> Last Name
- <input id="lastName" name="lastName" type="text" 
+ <br> Permanent Address
+ <input id="permanentAddress" name="permanentAddress" type="text" 
  class="form-control form-control-sm">
- <br> Date
- <input id="date" name="date" type="text" 
+ <br> Your email
+ <input id="email" name="email" type="text" 
  class="form-control form-control-sm">
- <br> Gender 
- <input id="gender" name="gender" type="text" 
+ <br> Contact Number
+ <input id="contactNumber" name="contactNumber" type="text" 
  class="form-control form-control-sm">
- <br>Father
- <input id="father" name="father" type="text" 
+ <br>Higher Education
+ <input id="higherEducation" name="higherEducation" type="text" 
  class="form-control form-control-sm">
- <br>Mother
- <input id="mother" name="mother" type="text" 
+ <br>Fluent language
+ <input id="language" name="language" type="text" 
  class="form-control form-control-sm">
- <br>Designation
- <input id="designation" name="designation" type="text" 
+ <br>Primary Skill
+ <input id="primarySkill" name="primarySkill" type="text" 
  class="form-control form-control-sm">
- <br>Department
- <input id="department" name="department" type="text" 
+ <br>Secondary Skill
+ <input id="secondarySkill" name="secondarySkill" type="text" 
  class="form-control form-control-sm">
  
  
@@ -60,8 +60,8 @@ pageEncoding="ISO-8859-1"%>
 <br>
 <div id="divItemsGrid">
  <%
-Official of =new Official();
- out.print(of.readItems()); 
+Contact c=new Contact();
+ out.print(c.readContactDetails()); 
  %>
 </div>
 </div> </div> </div> 
