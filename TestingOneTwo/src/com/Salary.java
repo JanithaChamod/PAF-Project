@@ -1,6 +1,6 @@
 package com; 
 import java.sql.*; 
-public class Contact
+public class Salary
 { 
 private Connection connect() 
  { 
@@ -29,35 +29,29 @@ public String readContactDetails()
  return "Error while connecting to the database for reading."; 
  } 
  // Prepare the html table to be displayed
- output = "<table border='1'><tr><th>Current Address</th> <th>Permanent Address</th><th>Email</th>"+ "<th>Contact Number</th>  <th>Higher Education</th><th>Fluent Language</th><th>Primary Skill</th><th>Secondary Skill</th><th>Update</th><th>Remove</th></tr>"; 
- String query = "select * from cuscontact"; 
+ output = "<table border='1'><tr><th>Email</th> <th>Month</th><th>Year</th>"+ "<th>Amount</th>  ><th>Update</th><th>Remove</th></tr>"; 
+ String query = "select * from salary"; 
  Statement stmt = con.createStatement(); 
  ResultSet rs = stmt.executeQuery(query); 
  // iterate through the rows in the result set
  while (rs.next()) 
  { 
- String itemID = Integer.toString(rs.getInt("conID")); 
- String cAddr = rs.getString("cAddr"); 
- String pAddr = rs.getString("pAddr"); 
- String myEmail = rs.getString("email");
- String contactNum = rs.getString("cNum");
- String higherEdu= rs.getString("highEdu");
- String lang = rs.getString("language");
- String primarySkill= rs.getString("pSkill");
- String secondarySkill = rs.getString("sSkill"); 
+ String itemID = Integer.toString(rs.getInt("salID")); 
+ String email = rs.getString("email"); 
+ String month = rs.getString("month"); 
+ String year = rs.getString("year");
+ String amount = rs.getString("amount");
+
  
  
  
  // Add into the html table
 output += "<tr><td><input id='hidItemIDUpdate' name='hidItemIDUpdate' type='hidden' value='" + itemID
- + "'>" + cAddr + "</td>"; 
- output += "<td>" + pAddr + "</td>"; 
- output += "<td>" + myEmail + "</td>"; 
- output += "<td>" + contactNum + "</td>"; 
- output += "<td>" + higherEdu+ "</td>"; 
- output += "<td>" + lang+ "</td>"; 
- output += "<td>" + primarySkill + "</td>"; 
- output += "<td>" + secondarySkill + "</td>"; 
+ + "'>" + email + "</td>"; 
+ output += "<td>" + month + "</td>"; 
+ output += "<td>" + year + "</td>"; 
+ output += "<td>" + amount + "</td>"; 
+ 
  // buttons
 //buttons
 output += "<td><input name='btnUpdate' type='button' value='Update' "
@@ -78,7 +72,7 @@ output += "<td><input name='btnUpdate' type='button' value='Update' "
  return output; 
  } 
 public String insertItem(String a, String b, 
- String c, String d,String e,String f,String g, String h) 
+ String c, String d) 
  { 
  String output = ""; 
  try
@@ -89,9 +83,9 @@ public String insertItem(String a, String b,
  return "Error while connecting to the database for inserting."; 
  } 
  // create a prepared statement
- String query = " insert into cuscontact(`conID`,`cAddr`,`pAddr`,`email`,`cNum`,`highEdu`,`language`,`pSkill`,`sSkill`)"
+ String query = " insert into salary(`salID`,`email`,`month`,`year`,`amount`)"
  
- + " values (?, ?, ?, ?, ?,?,?,?,?)"; 
+ + " values (?, ?, ?, ?, ?)"; 
  PreparedStatement preparedStmt = con.prepareStatement(query); 
  // binding values
  preparedStmt.setInt(1, 0); 
@@ -99,10 +93,8 @@ public String insertItem(String a, String b,
  preparedStmt.setString(3, b); 
  preparedStmt.setString(4, c); 
  preparedStmt.setString(5, d); 
- preparedStmt.setString(6, e); 
- preparedStmt.setString(7, f); 
- preparedStmt.setString(8, g); 
- preparedStmt.setString(9, h); 
+
+
  // execute the statement
  preparedStmt.execute(); 
  con.close(); 
@@ -118,7 +110,7 @@ public String insertItem(String a, String b,
  return output; 
  } 
 public String updateItem(String a, String b, String c, 
- String d, String e,String f,String g,String h,String i) 
+ String d, String e) 
  { 
  String output = ""; 
  try
@@ -129,19 +121,16 @@ public String updateItem(String a, String b, String c,
  return "Error while connecting to the database for updating."; 
  } 
  // create a prepared statement
- String query = "UPDATE cuscontact SET cAddr=?,pAddr=?,email=?,cNum=?,highEdu=?,language=?,pSkill=?,sSkill=? WHERE conID=?"; 
+ String query = "UPDATE salary SET email=?,month=?,year=?,amount=? WHERE salID=?"; 
  PreparedStatement preparedStmt = con.prepareStatement(query); 
  // binding values
  preparedStmt.setString(1, b); 
  preparedStmt.setString(2, c); 
  preparedStmt.setString(3, d); 
  preparedStmt.setString(4, e);
- preparedStmt.setString(5, f);
- preparedStmt.setString(6, g);
- preparedStmt.setString(7, h);
- preparedStmt.setString(8, i); 
+
  
- preparedStmt.setInt(9, Integer.parseInt(a)); 
+ preparedStmt.setInt(5, Integer.parseInt(a)); 
  
  // execute the statement
  preparedStmt.execute(); 
@@ -168,7 +157,7 @@ public String deleteItem(String empID)
  return "Error while connecting to the database for deleting."; 
  } 
  // create a prepared statement
- String query = "delete from cuscontact where conID=?"; 
+ String query = "delete from salary where salID=?"; 
  PreparedStatement preparedStmt = con.prepareStatement(query); 
  // binding values
  preparedStmt.setInt(1, Integer.parseInt(empID)); 
