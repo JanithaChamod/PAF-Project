@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LeaveAPI
+ * Servlet implementation class TimesheetAPI
  */
-@WebServlet("/LeaveAPI")
-public class LeaveAPI extends HttpServlet {
+@WebServlet("/TimesheetAPI")
+public class TimesheetAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LeaveAPI() {
+    public TimesheetAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,12 +37,12 @@ public class LeaveAPI extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-Leave l=new Leave();
-		String output = l.insertItem(request.getParameter("email"), 
-				 request.getParameter("leaveDesc"), 
-				request.getParameter("leaveStart"), 
-				request.getParameter("leaveEnd"),
-				request.getParameter("leaveStatus")
+		Timesheet t=new Timesheet();
+		String output = t.insertItem(request.getParameter("email"), 
+				 request.getParameter("workTitle"), 
+				request.getParameter("workDescription"), 
+				request.getParameter("total"),
+				request.getParameter("date")
 				); 
 				response.getWriter().write(output); 
 	}
@@ -55,14 +55,14 @@ Leave l=new Leave();
 		myMap m=new myMap();
 		Map paras = m.getParasMap(request); 
 		
-		Leave l=new Leave();
+	Timesheet t=new Timesheet();
 		
-		 String output = l.updateItem(paras.get("hidItemIDSave").toString(), 
+		 String output = t.updateItem(paras.get("hidItemIDSave").toString(), 
 		 paras.get("email").toString(), 
-		paras.get("leaveDesc").toString(), 
-		paras.get("leaveStart").toString(), 
-		paras.get("leaveEnd").toString(),
-		paras.get("status").toString()
+		paras.get("workTitle").toString(), 
+		paras.get("workDescription").toString(), 
+		paras.get("total").toString(),
+		paras.get("date").toString()
 		); 
 		response.getWriter().write(output); 
 		
@@ -73,15 +73,13 @@ Leave l=new Leave();
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		myMap m=new myMap();
 		Map paras = m.getParasMap(request); 
 		
-		Leave l=new Leave();
+	Timesheet t=new Timesheet();
 		
-		 String output = l.deleteItem(paras.get("itemID").toString()); 
+		 String output = t.deleteItem(paras.get("itemID").toString()); 
 		response.getWriter().write(output); 
-		
 	}
 
 }
